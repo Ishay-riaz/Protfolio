@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Automation for Real Estate — Esha Riaz</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #B8860B;
+    --gold-light: #F5ECD7;
+    --accent: #1A1A2E;
+    --bg: #FAFAF8;
+    --bg2: #F4F2EE;
+    --white: #FFFFFF;
+    --text: #1A1A1A;
+    --muted: #6B6B6B;
+    --border: #E0DDD7;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    padding: 18px 64px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(250,250,248,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-brand { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--accent); font-weight: 700; }
+  .nav-links { display: flex; gap: 36px; align-items: center; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.06em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-cta {
+    background: var(--accent); color: white !important;
+    padding: 10px 24px; font-size: 13px !important;
+    letter-spacing: 0.06em; font-weight: 500;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 120px 64px 80px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-text {
+    position: absolute; right: -20px; top: 50%; transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: 280px; font-weight: 700; color: rgba(0,0,0,0.03);
+    pointer-events: none; user-select: none; line-height: 1;
+    white-space: nowrap;
+  }
+  .hero-content { max-width: 680px; position: relative; z-index: 1; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold-light); color: var(--gold);
+    font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 6px 14px; margin-bottom: 32px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(40px, 5.5vw, 72px); font-weight: 700;
+    line-height: 1.1; margin-bottom: 24px; color: var(--accent);
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { font-size: 18px; color: var(--muted); max-width: 520px; line-height: 1.75; margin-bottom: 44px; font-weight: 300; }
+  .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-dark { background: var(--accent); color: white; padding: 15px 36px; font-size: 14px; font-weight: 600; letter-spacing: 0.05em; text-decoration: none; transition: opacity 0.2s; display: inline-block; }
+  .btn-dark:hover { opacity: 0.85; }
+  .btn-ghost { background: transparent; color: var(--accent); padding: 15px 36px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1.5px solid var(--accent); transition: all 0.2s; display: inline-block; }
+  .btn-ghost:hover { background: var(--accent); color: white; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--white); }
+  .stat { padding: 40px 32px; border-right: 1px solid var(--border); text-align: center; }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 44px; font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .stat-num span { color: var(--gold); }
+  .stat-lbl { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* SECTIONS */
+  section { padding: 96px 64px; }
+  .eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px; }
+  .sec-title { font-family: 'Playfair Display', serif; font-size: clamp(28px, 3.5vw, 48px); font-weight: 700; line-height: 1.2; color: var(--accent); margin-bottom: 16px; }
+  .sec-sub { font-size: 16px; color: var(--muted); max-width: 520px; line-height: 1.75; margin-bottom: 60px; }
+
+  /* SOLUTIONS */
+  .solutions-wrap { background: var(--bg2); }
+  .sol-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .sol-card { background: var(--white); padding: 40px 32px; transition: background 0.2s; }
+  .sol-card:hover { background: var(--gold-light); }
+  .sol-icon { font-size: 28px; margin-bottom: 20px; }
+  .sol-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+  .sol-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+  .sol-list { list-style: none; }
+  .sol-list li { font-size: 13px; color: var(--muted); padding: 7px 0; border-top: 1px solid var(--border); display: flex; align-items: flex-start; gap: 8px; }
+  .sol-list li::before { content: '—'; color: var(--gold); font-size: 11px; flex-shrink: 0; margin-top: 2px; }
+
+  /* CASE STUDIES */
+  .cases-wrap { background: var(--white); }
+  .case-card { border: 1px solid var(--border); margin-bottom: 24px; display: grid; grid-template-columns: 1fr 1fr; }
+  .case-card:last-child { margin-bottom: 0; }
+  .case-left { padding: 52px; border-right: 1px solid var(--border); }
+  .case-right { padding: 52px; background: var(--bg2); display: flex; flex-direction: column; justify-content: center; }
+  .case-tag { display: inline-block; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); background: var(--gold-light); padding: 4px 12px; margin-bottom: 20px; font-weight: 600; }
+  .case-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--accent); margin-bottom: 14px; }
+  .case-desc { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 32px; }
+  .case-metrics { display: flex; gap: 40px; padding-top: 24px; border-top: 1px solid var(--border); }
+  .metric-num { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: var(--gold); line-height: 1; }
+  .metric-lbl { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 0.05em; }
+  .flow-box { display: flex; flex-direction: column; gap: 0; }
+  .flow-item { display: flex; align-items: center; gap: 14px; padding: 13px 16px; background: var(--white); border: 1px solid var(--border); font-size: 13px; color: var(--text); margin-bottom: 3px; }
+  .flow-dot { width: 7px; height: 7px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+  .flow-arrow { text-align: left; padding: 0 16px; color: var(--gold); font-size: 16px; margin: 1px 0; }
+  .tags-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+  .tag { font-size: 12px; color: var(--muted); border: 1px solid var(--border); padding: 4px 12px; background: var(--white); }
+
+  /* PROCESS */
+  .process-wrap { background: var(--bg2); }
+  .process-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .process-card { background: var(--white); padding: 40px 28px; }
+  .process-num { font-family: 'Playfair Display', serif; font-size: 56px; font-weight: 700; color: var(--gold-light); line-height: 1; margin-bottom: 20px; }
+  .process-title { font-size: 16px; font-weight: 600; color: var(--accent); margin-bottom: 10px; }
+  .process-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* CTA */
+  .cta-wrap { background: var(--accent); color: white; text-align: center; padding: 96px 64px; }
+  .cta-wrap .eyebrow { color: var(--gold); }
+  .cta-wrap .sec-title { color: white; }
+  .cta-wrap .sec-sub { color: rgba(255,255,255,0.6); margin-left: auto; margin-right: auto; }
+  .cta-btns { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 56px; }
+  .btn-gold { background: var(--gold); color: white; padding: 15px 36px; font-size: 14px; font-weight: 600; letter-spacing: 0.05em; text-decoration: none; display: inline-block; transition: opacity 0.2s; }
+  .btn-gold:hover { opacity: 0.85; }
+  .btn-white-ghost { background: transparent; color: white; padding: 15px 36px; font-size: 14px; font-weight: 500; text-decoration: none; border: 1.5px solid rgba(255,255,255,0.3); display: inline-block; transition: all 0.2s; }
+  .btn-white-ghost:hover { border-color: white; }
+  .contact-row { display: flex; justify-content: center; gap: 56px; flex-wrap: wrap; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .contact-item .lbl { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .contact-item .val { font-size: 15px; color: rgba(255,255,255,0.85); }
+  .contact-item .val a { color: rgba(255,255,255,0.85); text-decoration: none; }
+  .contact-item .val a:hover { color: white; }
+
+  /* FOOTER */
+  footer { padding: 24px 64px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--white); }
+  footer p { font-size: 13px; color: var(--muted); }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 960px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    section { padding: 64px 24px; }
+    .stats { grid-template-columns: repeat(2,1fr); }
+    .stat { border-bottom: 1px solid var(--border); }
+    .sol-grid { grid-template-columns: 1fr; }
+    .case-card { grid-template-columns: 1fr; }
+    .case-right { border-top: 1px solid var(--border); }
+    .case-left, .case-right { padding: 32px 24px; }
+    .process-grid { grid-template-columns: repeat(2,1fr); }
+    .cta-wrap { padding: 64px 24px; }
+    footer { padding: 20px 24px; flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Esha Riaz</div>
+  <div class="nav-links">
+    <a href="#solutions">Solutions</a>
+    <a href="#cases">Case Studies</a>
+    <a href="#process">Process</a>
+    <a href="tel:+923176061035" class="nav-cta">Book a Call</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg-text">RE</div>
+  <div class="hero-content">
+    <div class="hero-tag">✦ AI Automation Engineer</div>
+    <h1>I help business owners<br><em>automate operations</em><br>and grow revenue with AI.</h1>
+    <p class="hero-sub">I've helped multiple business owners across industries eliminate manual work, respond to leads faster, and scale their operations — all through AI-powered automation systems built on n8n, GoHighLevel, and OpenAI.</p>
+    <div class="hero-btns">
+      <a href="tel:+923176061035" class="btn-dark">Book a Free Call</a>
+      <a href="#solutions" class="btn-ghost">See What We'd Build</a>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">80<span>%+</span></div><div class="stat-lbl">Manual work eliminated</div></div>
+  <div class="stat"><div class="stat-num">60<span>s</span></div><div class="stat-lbl">Lead response time</div></div>
+  <div class="stat"><div class="stat-num">24<span>/7</span></div><div class="stat-lbl">AI handles inbound calls</div></div>
+  <div class="stat"><div class="stat-num">2<span>yrs</span></div><div class="stat-lbl">Production automation experience</div></div>
+</div>
+
+<!-- SOLUTIONS -->
+<section id="solutions" class="solutions-wrap">
+  <div class="eyebrow">What We Build</div>
+  <h2 class="sec-title">Six systems that run your<br>agency on autopilot.</h2>
+  <p class="sec-sub">Each solution is purpose-built for real estate — not a generic template adapted to fit.</p>
+  <div class="sol-grid">
+    <div class="sol-card">
+      <div class="sol-icon">📞</div>
+      <div class="sol-title">AI Voice Agent</div>
+      <p class="sol-desc">An AI agent handles every inbound call — qualifying leads, answering property questions, and booking viewings without a human picking up.</p>
+      <ul class="sol-list">
+        <li>24/7 inbound call handling</li>
+        <li>Qualifies budget, timeline & preference</li>
+        <li>Books viewings automatically</li>
+        <li>Call summary logged to CRM</li>
+      </ul>
+    </div>
+    <div class="sol-card">
+      <div class="sol-icon">⚡</div>
+      <div class="sol-title">Instant Lead Follow-Up</div>
+      <p class="sol-desc">The moment a lead comes in — website, Instagram, WhatsApp, portal — an automated sequence fires within 60 seconds, not hours.</p>
+      <ul class="sol-list">
+        <li>Response under 60 seconds</li>
+        <li>Personalized to their enquiry</li>
+        <li>SMS, WhatsApp & email</li>
+        <li>Auto-assigns to right agent</li>
+      </ul>
+    </div>
+    <div class="sol-card">
+      <div class="sol-icon">🏡</div>
+      <div class="sol-title">Property Listing Automation</div>
+      <p class="sol-desc">Add a listing once. AI writes the description and publishes it across all your platforms — Instagram, Facebook, WhatsApp, and website — automatically.</p>
+      <ul class="sol-list">
+        <li>AI-generated property descriptions</li>
+        <li>Auto-publish to all platforms</li>
+        <li>Price & status sync everywhere</li>
+        <li>Matched to interested buyers instantly</li>
+      </ul>
+    </div>
+    <div class="sol-card">
+      <div class="sol-icon">📊</div>
+      <div class="sol-title">Sales Pipeline Automation</div>
+      <p class="sol-desc">Pipeline stages update automatically based on client actions. No agent has to manually move a deal or remember to follow up.</p>
+      <ul class="sol-list">
+        <li>Auto stage updates on activity</li>
+        <li>Follow-up reminders to agents</li>
+        <li>Stale lead re-engagement</li>
+        <li>Deal progress notifications</li>
+      </ul>
+    </div>
+    <div class="sol-card">
+      <div class="sol-icon">📱</div>
+      <div class="sol-title">Social Media Automation</div>
+      <p class="sol-desc">Your social presence runs without manual posting. Content is generated, scheduled, and published consistently across all platforms every week.</p>
+      <ul class="sol-list">
+        <li>Weekly content calendar automated</li>
+        <li>AI captions per platform</li>
+        <li>Engagement triggers follow-up DMs</li>
+        <li>Performance reporting weekly</li>
+      </ul>
+    </div>
+    <div class="sol-card">
+      <div class="sol-icon">🤝</div>
+      <div class="sol-title">Client Nurture System</div>
+      <p class="sol-desc">Past clients and warm leads receive personalized touchpoints automatically — keeping your agency top of mind for referrals and repeat business.</p>
+      <ul class="sol-list">
+        <li>Birthday & anniversary messages</li>
+        <li>New listing alerts to matched buyers</li>
+        <li>Post-viewing follow-up sequences</li>
+        <li>Referral request automation</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="cases" class="cases-wrap">
+  <div class="eyebrow">Case Studies</div>
+  <h2 class="sec-title">Real estate automation<br>problems I've solved.</h2>
+  <p class="sec-sub">These are the kinds of systems I build — purpose-built for property businesses.</p>
+
+  <div class="case-card">
+    <div class="case-left">
+      <span class="case-tag">Lead Response Automation</span>
+      <h3 class="case-title">Instant Lead Follow-Up & Qualification System</h3>
+      <p class="case-desc">A real estate agency was losing leads because follow-ups were happening hours after enquiry — by which time the prospect had already spoken to a competitor. I built an automated pipeline that responds to every inbound lead within 60 seconds, qualifies them via a conversational SMS sequence, scores their intent, and routes high-quality leads directly to the right agent with a full profile summary.</p>
+      <div class="case-metrics">
+        <div><div class="metric-num">60s</div><div class="metric-lbl">Response time</div></div>
+        <div><div class="metric-num">85%</div><div class="metric-lbl">Faster qualification</div></div>
+        <div><div class="metric-num">0</div><div class="metric-lbl">Manual follow-ups needed</div></div>
+      </div>
+    </div>
+    <div class="case-right">
+      <div class="flow-box">
+        <div class="flow-item"><span class="flow-dot"></span>Lead submits enquiry on any platform</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>Automated SMS sent within 60 seconds</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>AI qualifies: budget, timeline, property type</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>Lead scored and routed to right agent</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>Agent receives full profile summary</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag">n8n</span><span class="tag">GoHighLevel</span><span class="tag">GPT-4</span><span class="tag">Twilio</span><span class="tag">REST APIs</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-left">
+      <span class="case-tag">AI Voice Agent</span>
+      <h3 class="case-title">Inbound Call Handling & Viewing Booking Automation</h3>
+      <p class="case-desc">A property consultancy was missing calls during peak hours and losing serious buyers who didn't leave voicemails. I built an AI voice agent that answers every inbound call, has a natural conversation to understand what the buyer is looking for, books viewing appointments directly into the calendar, and logs the full call summary to the CRM — with zero human involvement.</p>
+      <div class="case-metrics">
+        <div><div class="metric-num">24/7</div><div class="metric-lbl">Call coverage</div></div>
+        <div><div class="metric-num">100%</div><div class="metric-lbl">Calls answered</div></div>
+        <div><div class="metric-num">Auto</div><div class="metric-lbl">Viewing bookings</div></div>
+      </div>
+    </div>
+    <div class="case-right">
+      <div class="flow-box">
+        <div class="flow-item"><span class="flow-dot"></span>Buyer calls agency number</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>AI voice agent answers instantly</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>Qualifies buyer needs & budget</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>Books viewing into calendar</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>Summary + lead profile sent to agent</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag">Retell AI</span><span class="tag">n8n</span><span class="tag">GoHighLevel</span><span class="tag">Calendly</span><span class="tag">Supabase</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-card">
+    <div class="case-left">
+      <span class="case-tag">Listing & Social Automation</span>
+      <h3 class="case-title">Property Listing Auto-Publish Across All Platforms</h3>
+      <p class="case-desc">An agency's marketing team was spending 3–4 hours per listing manually writing descriptions, resizing images, and posting to Instagram, Facebook, WhatsApp, and the website. I built a system where the agent fills in a simple form with the property details, and everything else happens automatically — AI writes platform-specific copy, formats assets, and publishes everywhere within minutes.</p>
+      <div class="case-metrics">
+        <div><div class="metric-num">4hrs</div><div class="metric-lbl">Saved per listing</div></div>
+        <div><div class="metric-num">5min</div><div class="metric-lbl">From form to published</div></div>
+        <div><div class="metric-num">4x</div><div class="metric-lbl">Platforms published simultaneously</div></div>
+      </div>
+    </div>
+    <div class="case-right">
+      <div class="flow-box">
+        <div class="flow-item"><span class="flow-dot"></span>Agent fills simple property form</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>AI writes platform-specific descriptions</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>Auto-published: IG, FB, WhatsApp, website</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>Matched buyers notified automatically</div>
+        <div class="flow-arrow">↓</div>
+        <div class="flow-item"><span class="flow-dot"></span>Status updates sync everywhere on change</div>
+      </div>
+      <div class="tags-row">
+        <span class="tag">n8n</span><span class="tag">OpenAI</span><span class="tag">Make.com</span><span class="tag">Instagram API</span><span class="tag">WhatsApp API</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process" class="process-wrap">
+  <div class="eyebrow">How It Works</div>
+  <h2 class="sec-title">Live in weeks,<br>not months.</h2>
+  <p class="sec-sub">A clear, no-surprises process from first call to running system.</p>
+  <div class="process-grid">
+    <div class="process-card">
+      <div class="process-num">01</div>
+      <div class="process-title">Discovery Call</div>
+      <p class="process-desc">We map your current manual processes and agree on the highest-impact automation to build first.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-num">02</div>
+      <div class="process-title">Clear Scope</div>
+      <p class="process-desc">I deliver a written scope — what gets built, what tools are used, timeline, and outcome. No surprises.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-num">03</div>
+      <div class="process-title">Build & Test</div>
+      <p class="process-desc">I build, test every edge case, and make sure it handles real data before anything goes live with clients.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-num">04</div>
+      <div class="process-title">Launch & Support</div>
+      <p class="process-desc">We go live together. I document everything and stay on hand to monitor the first weeks of operation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact" class="cta-wrap" style="padding:96px 64px;">
+  <div class="eyebrow">Let's Talk</div>
+  <h2 class="sec-title">Ready to see your agency<br>running on autopilot?</h2>
+  <p class="sec-sub">Book a free 30-minute call. I'll show you exactly what I'd build and what the impact would be.</p>
+  <div class="cta-btns">
+    <a href="tel:+923176061035" class="btn-gold">📞 Call Now — +92 317 606 1035</a>
+    <a href="https://ishayy.github.io/Portfolio/" target="_blank" class="btn-white-ghost">View Full Portfolio</a>
+  </div>
+  <div class="contact-row">
+    <div class="contact-item"><div class="lbl">Email</div><div class="val"><a href="mailto:ishachohan001@gmail.com">ishachohan001@gmail.com</a></div></div>
+    <div class="contact-item"><div class="lbl">Phone / WhatsApp</div><div class="val"><a href="tel:+923176061035">+92 317 606 1035</a></div></div>
+    <div class="contact-item"><div class="lbl">LinkedIn</div><div class="val"><a href="https://www.linkedin.com/in/ishay-riaz-4a1507295/" target="_blank">Esha Riaz</a></div></div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Esha Riaz — AI Automation Engineer</p>
+  <p><a href="https://ishayy.github.io/Portfolio/">Main Portfolio →</a></p>
+</footer>
+
+</body>
+</html>
